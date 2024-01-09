@@ -9,16 +9,23 @@ The Receipt Processor is a Go web service that processes receipts and calculates
 - Go 1.17 or later
 - Docker (optional, for containerized deployment)
 
- Setup
+## Cloning and Setup
 
- **Build and Run with Docker:**
+1. **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/kamal39/receipt-processor.git
+    cd receipt-processor
+    ```
+
+2. **Build and Run with Docker:**
 
     ```bash
     docker build -t receipt-processor .
     docker run -p 8080:8080 receipt-processor
     ```
 
-   Note: Docker is optional and can be used for containerized deployment.
+    Note: Docker is optional and can be used for containerized deployment.
 
 ## API Endpoints
 
@@ -34,6 +41,11 @@ The Receipt Processor is a Go web service that processes receipts and calculates
     curl -X DELETE http://localhost:8080/receipts/$generated_id
     ```
 
+    **Curl Style:**
+    ```bash
+    curl -X POST -H "Content-Type: application/json" -d '{"retailer": "ExampleMart", "total": 50.25, "items": ["item1", "item2"], "purchaseDate": "2024-01-08T15:30:00Z"}' http://localhost:8080/receipts/process
+    ```
+
 ### Get Points (GET)
 
 - **Endpoint:** `/receipts/{id}/points`
@@ -46,4 +58,8 @@ The Receipt Processor is a Go web service that processes receipts and calculates
     curl -X DELETE http://localhost:8080/receipts/{id}/points
     ```
 
-   Replace `{id}` with the actual ID obtained from the `/receipts/process` endpoint.
+    **Curl Style:**
+    ```bash
+    # Replace {id} with the actual ID obtained from the /receipts/process endpoint
+    curl http://localhost:8080/receipts/{id}/points
+    ```
